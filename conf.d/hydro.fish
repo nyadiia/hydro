@@ -34,10 +34,16 @@ end
 function _hydro_postexec --on-event fish_postexec
     set --local last_status $pipestatus
     set --global _hydro_status "$_hydro_newline$_hydro_color_prompt$hydro_symbol_prompt"
+    set --global _hydro_status_code ""
 
     for code in $last_status
         if test $code -ne 0
-            set --global _hydro_status "$_hydro_color_error| "(echo $last_status)" $_hydro_newline$_hydro_color_prompt$_hydro_color_error$hydro_symbol_prompt"
+            if test "$hydro_rightprompt" = true
+                set --global _hydro_status "$_hydro_newline$_hydro_color_prompt$_hydro_color_error$hydro_symbol_prompt"
+                set --global _hydro_status_code "$_hydro_color_error"(echo $last_status)" "
+            else
+                set --global _hydro_status "$_hydro_color_error| "(echo $last_status)" $_hydro_newline$_hydro_color_prompt$_hydro_color_error$hydro_symbol_prompt"
+            end
             break
         end
     end
@@ -136,3 +142,4 @@ set --query hydro_symbol_git_ahead || set --global hydro_symbol_git_ahead ↑
 set --query hydro_symbol_git_behind || set --global hydro_symbol_git_behind ↓
 set --query hydro_multiline || set --global hydro_multiline false
 set --query hydro_cmd_duration_threshold || set --global hydro_cmd_duration_threshold 1000
+set --query hydro_rightprompt || set --global hydro_rightprompt false
