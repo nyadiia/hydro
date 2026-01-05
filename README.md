@@ -1,3 +1,6 @@
+# Fork changes
+- Added right prompt support enabled using hydro_rightprompt
+
 # <i>H</i>ydro
 
 > Ultra-pure, lag-free prompt with async Git status. Designed only for [Fish](https://fishshell.com).
@@ -9,7 +12,7 @@
 Install with [Fisher](https://github.com/jorgebucaran/fisher):
 
 ```console
-fisher install jorgebucaran/hydro
+fisher install nyadiia/hydro
 ```
 
 ## Features
